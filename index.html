@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MD Kawsar Pramanik  | BioLink</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #06060a;
+            --fg: #ffffff;
+            --muted: #888888;
+            --accent: #00e5cc;
+            --accent-secondary: #00b4d8;
+            --accent-tertiary: #7c3aed;
+            --card: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg);
+            color: var(--fg);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        h1, h2, h3 { font-family: 'Syne', sans-serif; }
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.4;
+            animation: float 25s ease-in-out infinite;
+            pointer-events: none;
+        }
+        .orb-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+            top: -200px;
+            right: -150px;
+        }
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--accent-tertiary) 0%, transparent 70%);
+            bottom: -150px;
+            left: -150px;
+            animation-delay: -8s;
+        }
+        .orb-3 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--accent-secondary) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: -16s;
+        }
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(40px, -40px) scale(1.1); }
+            50% { transform: translate(-30px, 30px) scale(0.95); }
+            75% { transform: translate(30px, 40px) scale(1.05); }
+        }
+        .glass {
+            background: var(--card);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+        }
+        .profile-container {
+            position: relative;
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 24px;
+        }
+        .profile-glow {
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--accent-tertiary), var(--accent-secondary));
+            animation: rotateGlow 4s linear infinite;
+            opacity: 0.8;
+        }
+        @keyframes rotateGlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .profile-ring {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--accent-tertiary), var(--accent-secondary));
+            padding: 3px;
+            animation: pulseRing 3s ease-in-out infinite;
+        }
+        @keyframes pulseRing {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.03); opacity: 0.85; }
+        }
+        .profile-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: var(--bg);
+            padding: 4px;
+        }
+        .profile-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .name-glow {
+            background: linear-gradient(135deg, var(--fg) 0%, var(--accent) 50%, var(--accent-tertiary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .social-btn {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            padding: 20px;
+        }
+        .social-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--accent), var(--accent-tertiary), var(--accent-secondary));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 0;
+        }
+        .social-btn:hover::before { opacity: 0.15; }
+        .social-btn:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 25px 50px -15px rgba(0, 229, 204, 0.35);
+        }
+        .social-btn > * { position: relative; z-index: 1; }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+        .contact-item:hover {
+            transform: translateX(8px);
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .dev-btn {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            z-index: 9999;
+            padding: 16px 32px;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            border: none;
+            background: linear-gradient(135deg, #ff0080, #ff8c00, #40e0d0, #8a2be2, #ff0080, #00ff88, #00d4ff, #ff0080);
+            background-size: 500% 500%;
+            color: #fff;
+            animation: rainbowShift 5s ease infinite, floatBtn 3s ease-in-out infinite, glowPulse 2.5s ease-in-out infinite;
+            box-shadow: 0 0 25px rgba(0, 229, 204, 0.5), 0 0 50px rgba(138, 43, 226, 0.3), 0 10px 40px -10px rgba(255, 0, 128, 0.4);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        @keyframes rainbowShift {
+            0%, 100% { background-position: 0% 50%; }
+            25% { background-position: 50% 0%; }
+            50% { background-position: 100% 50%; }
+            75% { background-position: 50% 100%; }
+        }
+        @keyframes floatBtn {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 0 25px rgba(0, 229, 204, 0.5), 0 0 50px rgba(138, 43, 226, 0.3), 0 10px 40px -10px rgba(255, 0, 128, 0.4); }
+            50% { box-shadow: 0 0 40px rgba(0, 229, 204, 0.7), 0 0 80px rgba(138, 43, 226, 0.5), 0 15px 50px -10px rgba(255, 0, 128, 0.6); }
+        }
+        .entrance {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: entrance 0.8s ease forwards;
+        }
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        @keyframes entrance {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+            }
+        }
+        @media (max-width: 640px) {
+            .dev-btn { padding: 14px 24px; font-size: 13px; bottom: 20px; right: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <main style="position: relative; z-index: 10; min-height: 100vh; padding: 40px 20px; max-width: 500px; margin: 0 auto;">
+        <section style="text-align: center; margin-bottom: 40px;" class="entrance">
+            <div class="profile-container">
+                <div class="profile-glow"></div>
+                <div class="profile-ring">
+                    <div class="profile-inner">
+                        <img src="https://iili.io/nWkam6Q.md.jpg" alt="nWkam6Q.md.jpg" alt="MD Kawsar Pramanik " class="profile-image">
+                    </div>
+                </div>
+            </div>
+            <h1 style="font-size: 32px; font-weight: 700; margin-bottom: 8px;" class="name-glow">MD Kawsar Pramanik </h1>
+            <p style="color: var(--muted); font-size: 14px; margin-bottom: 8px;">Kawsar</p>
+            <p style="color: #aaa; font-size: 15px; max-width: 300px; margin: 0 auto;">আমি একজন নতুন Ethical Hacker এবং Cyber Security enthusiast। 🔐💻 প্রযুক্তি, প্রোগ্রামিং ও সাইবার সিকিউরিটি শিখতে ভালোবাসি। আমার লক্ষ্য হলো দক্ষতা অর্জন করা, নতুন কিছু তৈরি করা এবং নিরাপদ ডিজিটাল বিশ্ব গড়তে অবদান রাখা। 🚀</p>
+        </section>
+
+        <section style="margin-bottom: 32px;" class="entrance delay-1">
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
+<a href="https://www.facebook.com/share/1BosXYA4ut/" target="_blank" rel="noopener noreferrer" class="social-btn glass">
+                <svg class="w-6 h-6" fill="#1877F2" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                <span style="font-size: 13px; font-weight: 500;">Facebook</span>
+            </a>
+<a href="https://t.me/kawsar88x" target="_blank" rel="noopener noreferrer" class="social-btn glass">
+                <svg class="w-6 h-6" fill="#26A5E4" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                <span style="font-size: 13px; font-weight: 500;">Telegram</span>
+            </a>
+<a href="https://wa.me/8801321053212" target="_blank" rel="noopener noreferrer" class="social-btn glass">
+                <svg class="w-6 h-6" fill="#25D366" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                <span style="font-size: 13px; font-weight: 500;">WhatsApp</span>
+            </a>
+            </div>
+        </section>
+
+        <section class="entrance delay-2">
+            <div class="glass" style="padding: 24px;">
+                <h3 style="font-size: 14px; font-weight: 600; color: var(--muted); text-align: center; margin-bottom: 20px;">Contact Information</h3>
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <a href="tel:+8801321053212" class="contact-item">
+                        <div style="width: 44px; height: 44px; border-radius: 14px; background: linear-gradient(135deg, rgba(0, 229, 204, 0.2), rgba(0, 180, 216, 0.15)); display: flex; align-items: center; justify-content: center;">
+                            <svg style="width: 22px; height: 22px; color: #00e5cc;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                        </div>
+                        <div>
+                            <p style="font-size: 11px; color: var(--muted); margin-bottom: 2px;">Phone</p>
+                            <p style="font-size: 14px;">+8801321053212</p>
+                        </div>
+                    </a>
+                    <a href="mailto:kawsadhshosf@gmail.com" class="contact-item">
+                        <div style="width: 44px; height: 44px; border-radius: 14px; background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(236, 72, 153, 0.15)); display: flex; align-items: center; justify-content: center;">
+                            <svg style="width: 22px; height: 22px; color: #7c3aed;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                        </div>
+                        <div>
+                            <p style="font-size: 11px; color: var(--muted); margin-bottom: 2px;">Email</p>
+                            <p style="font-size: 14px;">kawsadhshosf@gmail.com</p>
+                        </div>
+                    </a>
+                    <div class="contact-item" style="cursor: default;">
+                        <div style="width: 44px; height: 44px; border-radius: 14px; background: linear-gradient(135deg, rgba(236, 72, 153, 0.2), rgba(255, 107, 53, 0.15)); display: flex; align-items: center; justify-content: center;">
+                            <svg style="width: 22px; height: 22px; color: #ec4899;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                        </div>
+                        <div>
+                            <p style="font-size: 11px; color: var(--muted); margin-bottom: 2px;">Location</p>
+                            <p style="font-size: 14px;">Gaibandha </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border);">
+            <p style="font-size: 12px; color: #555;">Designed & Built by <span style="color: var(--accent); font-weight: 500;">Nafiz Sheikh</span></p>
+        </footer>
+    </main>
+
+    <button class="dev-btn" onclick="window.open('https://nafiz1000x.github.io/Nafizsheikh.web/', '_blank')">Developer By Nafiz Sheikh</button>
+</body>
+</html>
